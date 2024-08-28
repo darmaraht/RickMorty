@@ -1,0 +1,153 @@
+{
+  "images" : [
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "filename" : "ipad-notification.png",
+      "expected-size" : "20"
+    },
+    {
+      "filename" : "ipad-notification@2x.png",
+      "expected-size" : "40",
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "expected-size" : "29",
+      "scale" : "1x",
+      "filename" : "ipad-settings.png",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "ipad-settings@2x.png",
+      "idiom" : "ipad",
+      "expected-size" : "58",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "size" : "40x40",
+      "expected-size" : "40",
+      "filename" : "ipad-spotlight.png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "scale" : "2x",
+      "idiom" : "ipad",
+      "filename" : "ipad-spotlight@2x.png",
+      "expected-size" : "80",
+      "size" : "40x40"
+    },
+    {
+      "size" : "76x76",
+      "scale" : "1x",
+      "expected-size" : "76",
+      "idiom" : "ipad",
+      "filename" : "ipad-appicon.png"
+    },
+    {
+      "scale" : "2x",
+      "filename" : "ipad-appicon@2x.png",
+      "idiom" : "ipad",
+      "size" : "76x76",
+      "expected-size" : "152"
+    },
+    {
+      "scale" : "2x",
+      "expected-size" : "167",
+      "filename" : "ipad-pro-appicon.png",
+      "size" : "83.5x83.5",
+      "idiom" : "ipad"
+    },
+    {
+      "idiom" : "ios-marketing",
+      "filename" : "iTunesArtwork@2x.png",
+      "expected-size" : "1024",
+      "size" : "1024x1024",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "iphone-notification@2x.png",
+      "expected-size" : "40",
+      "size" : "20x20"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "iphone",
+      "size" : "20x20",
+      "expected-size" : "60",
+      "filename" : "iphone-notification@3x.png"
+    },
+    {
+      "filename" : "iphone-settings.png",
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "expected-size" : "29",
+      "size" : "29x29"
+    },
+    {
+      "scale" : "2x",
+      "size" : "29x29",
+      "expected-size" : "58",
+      "filename" : "iphone-settings@2x.png",
+      "idiom" : "iphone"
+    },
+    {
+      "scale" : "3x",
+      "size" : "29x29",
+      "expected-size" : "87",
+      "filename" : "iphone-settings@3x.png",
+      "idiom" : "iphone"
+    },
+    {
+      "scale" : "2x",
+      "filename" : "iphone-spotlight@2x.png",
+      "idiom" : "iphone",
+      "size" : "40x40",
+      "expected-size" : "80"
+    },
+    {
+      "filename" : "iphone-spotlight@3x.png",
+      "size" : "40x40",
+      "scale" : "3x",
+      "expected-size" : "120",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "iphone-oldAppicon.png",
+      "scale" : "1x",
+      "size" : "57x57",
+      "expected-size" : "57",
+      "idiom" : "iphone"
+    },
+    {
+      "size" : "57x57",
+      "scale" : "2x",
+      "expected-size" : "114",
+      "filename" : "iphone-oldAppicon@2x.png",
+      "idiom" : "iphone"
+    },
+    {
+      "scale" : "2x",
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "iphone-appicon@2x.png",
+      "expected-size" : "120"
+    },
+    {
+      "filename" : "iphone-appicon@3x.png",
+      "idiom" : "iphone",
+      "size" : "60x60",
+      "scale" : "3x",
+      "expected-size" : "180"
+    }
+  ],
+  "version" : "2.1",
+  "author" : "Icondary"
+}
