@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 final class ApiService {
+    
     enum Path: String {
         case character
         case location
@@ -28,6 +29,7 @@ extension ApiService {
         type: T.Type,
         path: Path,
         page: Int,
+        searchQuery: String? = nil,
         callBack: @escaping (Result<ApiCommonResponse<T>, Error>) -> Void
     ) {
         guard
@@ -37,11 +39,16 @@ extension ApiService {
             return
         }
         
+        var parameters: [String: Any] = ["page": page]
+        if let searchQuery = searchQuery {
+            parameters["name"] = searchQuery
+        }
+        
         AF.session.configuration.requestCachePolicy = .reloadIgnoringCacheData
         AF.request(
             url,
             method: .get,
-            parameters: ["page": page]
+            parameters: parameters
         ).responseDecodable(of: ApiCommonResponse<T>.self) { response in
             switch response.result {
             case .success(let responseModel):
@@ -51,8 +58,7 @@ extension ApiService {
             }
         }
     }
-    
-    
+  
     func makeSingleObjectRequest<T: Codable>(
         type: T.Type,
         fullUrlString: String,
