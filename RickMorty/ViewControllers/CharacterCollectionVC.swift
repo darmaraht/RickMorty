@@ -14,9 +14,9 @@ final class CharacterCollectionVC: UIViewController {
     // MARK: Subviews
     
     private let searchController = UISearchController()
-    private let collectionView: UICollectionView    
+    private let collectionView: UICollectionView
     private let gridButton = UIBarButtonItem()
-
+    
     // MARK: Properties
     
     private var characters: [CharacterModel] = []
@@ -36,7 +36,7 @@ final class CharacterCollectionVC: UIViewController {
     private let numberOfColumnsInGrid = 2
     private let gridLayout: UICollectionViewFlowLayout
     private let listLayout: UICollectionViewFlowLayout
-        
+    
     // MARK: Init
     
     init() {
@@ -143,33 +143,45 @@ final class CharacterCollectionVC: UIViewController {
         collectionView.reloadData() // Ensure the data is reloaded when switching views
     }
     
-    private func loadData() {
+    private func loadData(query: String? = nil) {
         ApiService.shared.makeRequest(
             type: CharacterModel.self,
             path: .character,
             page: currentPage,
+            searchQuery: query,
             callBack: { [weak self] result in
                 switch result {
                 case .success(let response):
-                    self?.characters.append(contentsOf: response.results)
+                    if let query = query, self?.isFiltering == true {
+                        // Добавляем новые результаты в отфильтрованные персонажи
+                        self?.filteredCharacters.append(contentsOf: response.results)
+                    } else {
+                        // Добавляем данные в основной список
+                        self?.characters.append(contentsOf: response.results)
+                    }
                     
                     self?.hasMoreDataToLoad = response.info.next != nil
-                    
                     self?.currentPage += 1
                     
                     // Сохранение загруженных данных в Realm
                     self?.saveCharactersToRealm(response.results)
                     
                     self?.collectionView.reloadData()
+                    
+                    // Продолжаем загрузку, если есть еще страницы
+                    if self?.hasMoreDataToLoad == true {
+                        self?.loadData(query: query)
+                    }
+                    
                 case .failure(let error):
                     print(error)
                     guard let self else { return }
                     DispatchQueue.main.asyncAfter(
                         deadline: .now() + 2,
                         execute: {
-                            if self.retries < 3 { // Реализация
-                                self.loadData()   // попыток
-                                self.retries += 1 // при разрешении
+                            if self.retries < 3 {
+                                self.loadData(query: query)
+                                self.retries += 1
                             } else {
                                 // Загрузка персонажей из Realm при неудаче
                                 self.loadCharactersFromRealm()
@@ -203,7 +215,7 @@ extension CharacterCollectionVC: UICollectionViewDelegate, UICollectionViewDataS
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if isFiltering {
-            return filteredCharacters.isEmpty ? 1 : 2
+            return 1
         } else {
             return hasMoreDataToLoad ? 2 : 1
         }
@@ -250,12 +262,22 @@ extension CharacterCollectionVC: UICollectionViewDelegate, UICollectionViewDataS
             }
             cell.startAnimating()
             
-            // Подгрузка данных при прокрутке до конца
-            if hasMoreDataToLoad {
+            // Подгрузка данных, если не фильтруется или если фильтрация активна и есть ещё данные для подгрузки
+            if hasMoreDataToLoad && !isFiltering {
                 loadData()
             }
             
             return cell
+        }
+    }
+    
+    // Вызывается при скроллинге коллекции
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Проверка, если выполняется фильтрация и коллекция дошла до конца, подгружаем данные
+        if isFiltering && scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height - 100 {
+            if hasMoreDataToLoad {
+                loadData()
+            }
         }
     }
     
@@ -283,12 +305,17 @@ extension CharacterCollectionVC: UISearchResultsUpdating {
             return
         }
         
-        filteredCharacters = characters.filter { character in
-            character.name.lowercased().contains(searchText.lowercased()) ||
-            character.species.lowercased().contains(searchText.lowercased())
-        }
+        // Фильтрация по локальным данным
+        filteredCharacters = characters.filter { $0.name.contains(searchText) }
         
-        collectionView.reloadData()
+        if filteredCharacters.isEmpty {
+            // Если ничего не найдено локально, делаем запрос на сервер
+            currentPage = 1 // Сброс страницы для нового поиска
+            filteredCharacters.removeAll() // Очищаем текущий список фильтрованных персонажей
+            loadData(query: searchText) // Выполняем запрос на сервер
+        } else {
+            collectionView.reloadData()
+        }
     }
 }
 
