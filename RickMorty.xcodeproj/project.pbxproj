@@ -46,6 +46,8 @@
 		073FD4562C661FE1009F88C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 073FD4552C661FE1009F88C2 /* GoogleService-Info.plist */; };
 		073FD4592C663784009F88C2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 073FD4582C663784009F88C2 /* RealmSwift */; };
 		073FD45A2C6F704A009F88C2 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 073FD4582C663784009F88C2 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		073FD4BF2C80C3B2009F88C2 /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073FD4BE2C80C3B2009F88C2 /* NoNetworkView.swift */; };
+		07F510E32C81E9190016E522 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 07F510E22C81E9190016E522 /* Reachability */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +98,7 @@
 		073FD43E2C66016B009F88C2 /* UserTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabBarController.swift; sourceTree = "<group>"; };
 		073FD4402C66019D009F88C2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		073FD4552C661FE1009F88C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		073FD4BE2C80C3B2009F88C2 /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,7 @@
 				073FD4592C663784009F88C2 /* RealmSwift in Frameworks */,
 				073FD4542C6609A9009F88C2 /* FirebaseRemoteConfig in Frameworks */,
 				073FD44D2C660987009F88C2 /* SDWebImage in Frameworks */,
+				07F510E32C81E9190016E522 /* Reachability in Frameworks */,
 				073FD4502C6609A9009F88C2 /* FirebaseAnalytics in Frameworks */,
 				073FD4472C660968009F88C2 /* SnapKit in Frameworks */,
 			);
@@ -174,6 +178,7 @@
 				073FD4262C65FFEA009F88C2 /* CollectionLoadCell.swift */,
 				073FD4282C660011009F88C2 /* CharacterCollectionGridCellView.swift */,
 				073FD42A2C66002F009F88C2 /* CharacterCollectionListCellView.swift */,
+				073FD4BE2C80C3B2009F88C2 /* NoNetworkView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				073FD4512C6609A9009F88C2 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				073FD4532C6609A9009F88C2 /* FirebaseRemoteConfig */,
 				073FD4582C663784009F88C2 /* RealmSwift */,
+				07F510E22C81E9190016E522 /* Reachability */,
 			);
 			productName = RickMorty;
 			productReference = 073FD3F52C65303F009F88C2 /* RickMorty.app */;
@@ -272,6 +278,7 @@
 				073FD44B2C660987009F88C2 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				073FD44E2C6609A9009F88C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				073FD4572C663784009F88C2 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				07F510E12C81E9190016E522 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 073FD3F62C65303F009F88C2 /* Products */;
 			projectDirPath = "";
@@ -325,6 +332,7 @@
 				073FD41F2C65FF64009F88C2 /* LocationTableViewCell.swift in Sources */,
 				073FD42D2C660057009F88C2 /* ApiService.swift in Sources */,
 				073FD4212C65FF78009F88C2 /* EpisodeTableViewCell.swift in Sources */,
+				073FD4BF2C80C3B2009F88C2 /* NoNetworkView.swift in Sources */,
 				073FD4112C65FEB7009F88C2 /* CharacterDetailVC.swift in Sources */,
 				073FD4332C6600AE009F88C2 /* LocationModel.swift in Sources */,
 				073FD4152C65FEE6009F88C2 /* EpisodeTableVC.swift in Sources */,
@@ -582,6 +590,14 @@
 				kind = branch;
 			};
 		};
+		07F510E12C81E9190016E522 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +635,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 073FD4572C663784009F88C2 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		07F510E22C81E9190016E522 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07F510E12C81E9190016E522 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

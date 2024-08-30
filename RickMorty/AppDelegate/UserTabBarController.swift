@@ -10,6 +10,8 @@ import FirebaseRemoteConfig
 
 class UserTabBarController: UITabBarController, UITabBarControllerDelegate {
     
+    private let noNetworkView = NoNetworkView()
+    
     var remoteConfig = RemoteConfig.remoteConfig()
 
     override func viewDidLoad() {
@@ -23,6 +25,16 @@ class UserTabBarController: UITabBarController, UITabBarControllerDelegate {
         // Загрузка конфигурации и добавление первого таба
         fetchConfig {
             self.addFirstTab()
+        }
+        
+        setupNoNetworkView()
+    }
+    
+    private func setupNoNetworkView() {
+        view.addSubview(noNetworkView)
+        noNetworkView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(100)
+            make.right.equalToSuperview().inset(18)
         }
     }
     
