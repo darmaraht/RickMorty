@@ -17,6 +17,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     private let tableView = UITableView()
     private var emptyLabel = UILabel()
     private let segmentedControl = UISegmentedControl(items: FavoriteSegment.allCases.map { $0.title })
+    private let goToButton = UIButton()
     
     // MARK: Properties
     
@@ -38,6 +39,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         setupSegmentedControl()
         setupTableView()
         setupEmptyLabel()
+        setupGoToButton()
         loadFavorites()
     }
     
@@ -85,13 +87,58 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         segmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
     }
     
+    private func setupGoToButton() {
+        view.addSubview(goToButton)
+        goToButton.backgroundColor = .systemBackground
+        goToButton.setTitle(String(localized: "goTo"), for: .normal)
+        goToButton.setTitleColor(UIColor.black, for: .normal)
+        goToButton.clipsToBounds = true
+        goToButton.layer.cornerRadius = 15
+        goToButton.layer.borderWidth = 4
+        goToButton.layer.borderColor = UIColor.systemGray4.cgColor
+
+        goToButton.addTarget(self, action: #selector(goToButtonReleased), for: [.touchUpInside, .touchCancel, .touchDragExit])
+
+        goToButton.snp.makeConstraints {
+            $0.width.equalTo(200)
+            $0.height.equalTo(50)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(150)
+        }
+    }
+    
+    // MARK: Private methods
+    
+    @objc private func goToButtonReleased() {
+        goToButton.backgroundColor = .systemBackground
+
+        switch selectedSegment {
+        case .characters:
+            navigateToCharactersScreen()
+        case .locations:
+            navigateToLocationsScreen()
+        case .episodes:
+            navigateToEpisodesScreen()
+        }
+    }
+
+    private func navigateToCharactersScreen() {
+        self.tabBarController?.selectedIndex = 0
+    }
+
+    private func navigateToLocationsScreen() {
+        self.tabBarController?.selectedIndex = 1
+    }
+
+    private func navigateToEpisodesScreen() {
+        self.tabBarController?.selectedIndex = 2
+    }
+
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         if let newSegment = FavoriteSegment(rawValue: sender.selectedSegmentIndex) {
             selectedSegment = newSegment
         }
     }
-    
-    // MARK: Private methods
     
     private func loadFavorites() {
         switch selectedSegment {
@@ -156,6 +203,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         }
         emptyLabel.text = selectedSegment.emptyMessage
         emptyLabel.isHidden = !isFavoritesEmpty
+        goToButton.isHidden = !isFavoritesEmpty
     }
     
     // MARK: UITableViewDataSourse

@@ -23,9 +23,9 @@ enum FavoriteSegment: Int, CaseIterable {
     
     var emptyMessage: String {
         switch self {
-        case .characters: return "Нет избранных Персонажей"
-        case .locations: return "Нет избранных Локаций"
-        case .episodes: return "Нет избранных Эпизодов"
+        case .characters: return "Нет избранных Персонажей нажмите перейти чтоб добавить"
+        case .locations: return "Нет избранных Локаций нажмите перейти чтоб добавить"
+        case .episodes: return "Нет избранных Эпизодов нажмите перейти чтоб добавить"
         }
     }
     
