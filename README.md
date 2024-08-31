@@ -4,6 +4,7 @@ Rick and Morty Explorer — это iOS приложение, разработа�
 
 ![preview](https://github.com/darmaraht/RickMorty/blob/main/RickMortyPreview.gif)
 ![preview](https://github.com/darmaraht/RickMorty/blob/main/RickMortyPreview2.gif)
+![preview](https://github.com/darmaraht/RickMorty/blob/main/RickMortyPreview3.gif)
 
 ## 📋 Основные возможности
 
